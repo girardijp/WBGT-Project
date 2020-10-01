@@ -172,3 +172,29 @@ float thermalsensor::getdata(){
     //Serial.print("Temperatura de ");
     return(gettempc());
 }
+
+soilmoisturesensor::soilmoisturesensor() : Sensor(){
+
+}
+
+soilmoisturesensor::soilmoisturesensor(int pin, float data, int type) : Sensor(pin,data,type){
+
+}
+
+soilmoisturesensor::~soilmoisturesensor(){
+
+}
+
+float soilmoisturesensor::getdata(){
+    if(getpin()<=0){
+        return(0);
+    }
+    moisture = analogRead(getpin());
+    Serial.println(moisture);
+    //moisture/=10;
+    moisture=map(moisture, 3700, 1700, 0, 100);
+    setdata(moisture);
+    //Serial.println(getdata());
+    return(moisture);
+}
+
