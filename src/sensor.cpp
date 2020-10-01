@@ -126,7 +126,7 @@ int thermalsensor::setwire(const int input_pin){
     }
     OneWire *tempwire = new OneWire(input_pin);
     wire=tempwire;
-    Serial.println("set");
+    Serial.println("set thermalwire");
     return(1);
 
 }
@@ -151,7 +151,7 @@ DallasTemperature thermalsensor::getdalasdata() const{
 }
 
 void thermalsensor::dalasbegin() const{
-    Serial.println("begin");
+    Serial.println("begin thermal");
     if(dalasdata!=NULL){
         dalasdata->begin();
     }
@@ -169,6 +169,6 @@ float thermalsensor::gettempc(){
 }
 
 float thermalsensor::getdata(){
-     Serial.print("Temperatura de ");
+    //Serial.print("Temperatura de ");
     return(gettempc());
 }
