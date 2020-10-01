@@ -44,20 +44,34 @@ class thermalsensor : public Sensor{
 
     int settempmesh(const int);
     int gettempmesh() const;
+
+    float getdata();
+
+    private:
+
     int setwire(const int);
     OneWire getwire() const;
     int setdalasdata();
     DallasTemperature getdalasdata() const; //setar como private
     void dalasbegin() const;
     float gettempc();
-    float getdata();
 
-
-    private:
     OneWire* wire=NULL;
     DallasTemperature* dalasdata=NULL;
     int temp_mesh=0;
     float temperature_C;
+
+};
+
+class soilmoisturesensor : public Sensor{
+    public:
+    soilmoisturesensor();
+    soilmoisturesensor(int,float,int);
+    ~soilmoisturesensor();
+    float getdata();
+
+    private:
+    float moisture;
 
 };
 

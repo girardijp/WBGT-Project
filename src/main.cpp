@@ -64,7 +64,7 @@ void loop( ){
 
 void setvector(vector<Sensor*>& sensor_vector){
     int size;
-    //int pin_input;
+    int pin_input;
     //float data_input;
     int type_input;
     size = 5;
@@ -100,18 +100,23 @@ void setvector(vector<Sensor*>& sensor_vector){
 
         if(i==1){
             type_input=incomingReadings.pin1;
+            pin_input=26;
         }
         if(i==2){
             type_input=incomingReadings.pin2;
+            pin_input=32;
         }
         if(i==3){
             type_input=incomingReadings.pin3;
+            pin_input=0;
         }
         if(i==4){
             type_input=incomingReadings.pin4;
+            pin_input=0;
         }
         if(i==5){
             type_input=incomingReadings.pin5;
+            pin_input=0;
         }
 
         switch(type_input){
@@ -132,9 +137,15 @@ void setvector(vector<Sensor*>& sensor_vector){
             
             //sensor_vector.push_back(move(inputsensor));
 
-            sensor_vector.push_back(new thermalsensor(12, 0, type_input));
+            sensor_vector.push_back(new thermalsensor(pin_input, 0, type_input));
             //sensor_vector.emplace_back(move(inputsensor));
             //sensor_vector.push_back(inputsensor);
+            }
+
+            case 2:{
+
+            sensor_vector.push_back(new thermalsensor(pin_input, 0, type_input));
+            
             }
         }
         
