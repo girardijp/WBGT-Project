@@ -6,6 +6,7 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include <Arduino.h>
+#include "DHT.h"
 using namespace std;
 
 class Sensor{
@@ -74,6 +75,25 @@ class soilmoisturesensor : public Sensor{
     float moisture;
 
 };
+
+class dhttemp : public Sensor{
+    public:
+    dhttemp();
+    dhttemp(int,float,int);
+    ~dhttemp();
+    float getdata();
+    void dhtbegin();
+    void dhtset(int);
+
+    private:
+    DHT *dhtdata;
+    float temp;
+    float humi;
+};
+
+
+
+
 
 
 

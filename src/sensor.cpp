@@ -164,12 +164,10 @@ float thermalsensor::gettempc(){
     dalasdata->requestTemperatures();
     this->temperature_C = dalasdata->getTempCByIndex(0);
     setdata(this->temperature_C);
-    //Serial.println(this->temperature_C);
     return(this->temperature_C);
 }
 
 float thermalsensor::getdata(){
-    //Serial.print("Temperatura de ");
     return(gettempc());
 }
 
@@ -191,10 +189,59 @@ float soilmoisturesensor::getdata(){
     }
     moisture = analogRead(getpin());
     Serial.println(moisture);
-    //moisture/=10;
     moisture=map(moisture, 3700, 1700, 0, 100);
     setdata(moisture);
-    //Serial.println(getdata());
+    /*if(moisture>=100){
+      //moisture=100;
+    }*/
     return(moisture);
+}
+
+dhttemp::dhttemp () : Sensor() {
+
+}
+
+dhttemp::dhttemp(int pin, float data, int type) : Sensor(pin,data,type){
+    dhtset(getpin());
+    dhtbegin();
+
+}
+
+dhttemp::~dhttemp(){
+
+}
+
+void dhttemp::dhtset(int pin){
+    DHT *dhtnode = new DHT(pin,DHT11);
+    dhtdata=dhtnode;
+
+}
+
+void dhttemp::dhtbegin(){
+    if(dhtdata==NULL){
+        return;
+    }
+    dhtdata->begin();
+}
+
+float dhttemp::getdata(){
+    if(dhtdata==NULL){
+        return(0);
+    }
+    float t=dhtdata->readTemperature();
+    float h=dhtdata->readHumidity();
+    if(h<1){
+        h=1;
+    }
+    if(h>100){
+        h=100;
+    }
+    if(t<0){
+        t=1;
+    }
+    if(t>=100){
+        t=99;
+    }
+    return(h*1000+t*10);
 }
 
