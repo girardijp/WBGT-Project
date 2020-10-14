@@ -35,9 +35,10 @@ struct Sender_recive_data{
     int pin5=0;
 };
 
-Sender_send_data LocalReadings;
-
-Sender_recive_data incomingReadings;
+float LocalReadings[] = {0,0,0,0,0,0};
+//Sender_send_data LocalReadings;
+float incomingReadings[] = {0,1,2,3,0,0};
+//Sender_recive_data incomingReadings;
 
 /*void OnDataSent(const uint8_t *, esp_now_send_status_t);
 

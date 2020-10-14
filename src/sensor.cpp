@@ -164,6 +164,8 @@ float thermalsensor::gettempc(){
     dalasdata->requestTemperatures();
     this->temperature_C = dalasdata->getTempCByIndex(0);
     setdata(this->temperature_C);
+    //Serial.print("temp ");
+    //Serial.println(temperature_C);
     return(this->temperature_C);
 }
 
@@ -188,7 +190,7 @@ float soilmoisturesensor::getdata(){
         return(0);
     }
     moisture = analogRead(getpin());
-    Serial.println(moisture);
+    //Serial.println(moisture);
     moisture=map(moisture, 3700, 1700, 0, 100);
     setdata(moisture);
     /*if(moisture>=100){
@@ -242,6 +244,7 @@ float dhttemp::getdata(){
     if(t>=100){
         t=99;
     }
+    //setdata(h*1000+t*10);
     return(h*1000+t*10);
 }
 
