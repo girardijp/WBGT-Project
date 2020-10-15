@@ -17,7 +17,7 @@
 
 uint8_t broadcastAddress[] = {0x24, 0x62, 0xAB, 0xFF, 0x69, 0xF8};
 
-struct Sender_send_data{
+/*struct Sender_send_data{
     int change;
     float data1;
     float data2;
@@ -33,7 +33,7 @@ struct Sender_recive_data{
     int pin3=3;
     int pin4=0;
     int pin5=0;
-};
+};*/
 
 float LocalReadings[] = {0,0,0,0,0,0};
 //Sender_send_data LocalReadings;

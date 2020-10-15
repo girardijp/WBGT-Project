@@ -37,18 +37,21 @@ void setup(){
 void loop( ){
     Serial.println("comeco");
     
-    /*if(LocalReadings[0]!=incomingReadings[0]){
-        setvector(sensors);
-        LocalReadings.change=incomingReadings.change;
+    int i=1;
+    if(LocalReadings[0]!=incomingReadings[0]){
+        //setvector(sensors);
+        Serial.println("Mudanca");
+
+        LocalReadings[0]=incomingReadings[0];
     }
-    else{*/
-        for(int i=1; i<6;i++){
+    else{
+        for(i=1; i<6;i++){
             if(sensors[i-1]->getpin()!=0){
                 //Serial.print(i);
                 //Serial.println(Local)
                 //switch i:
                 LocalReadings[i]=sensors[i-1]->getdata();
-                if(i==1){
+                if(sensors[i-1]->gettype()==1){
                     if(LocalReadings[i]>100){
                         LocalReadings[i]=100;
                     }
@@ -57,15 +60,15 @@ void loop( ){
                     }
                     Serial.println(LocalReadings[i]);
                 }
-                if(i==2){
+                if(sensors[i-1]->gettype()==2){
                     Serial.println(LocalReadings[i]);
                 }
-                if(i==3){
+                if(sensors[i-1]->gettype()==3){
                     if(LocalReadings[i]!=0){
-                        LocalReadings[4]=((float((int)(LocalReadings[3])%1000))/10);
-                        Serial.println(LocalReadings[4]);
-                        LocalReadings[3]=(int)(LocalReadings[3]/1000);
-                        Serial.println(LocalReadings[3]);
+                        LocalReadings[i+1]=((float((int)(LocalReadings[i])%1000))/10);
+                        Serial.println(LocalReadings[i+1]);
+                        LocalReadings[i]=(int)(LocalReadings[i]/1000);
+                        Serial.println(LocalReadings[i]);
                         i++;
                     }
                 }
@@ -104,7 +107,8 @@ void loop( ){
 
             }
        }
-    //}
+    }
+    i=1;
     //send(&LocalReadings,broadcastAddress);
     Serial.println("Teste");
     esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &LocalReadings, sizeof(LocalReadings));
@@ -116,7 +120,7 @@ void loop( ){
         Serial.println("Error");
     }
 
-    delay(1000);
+    delay(1500);
 }
 
 void setvector(vector<Sensor*>& sensor_vector){
