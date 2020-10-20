@@ -63,17 +63,18 @@ void loop( ){
                     Serial.println(LocalReadings[i]);
                 }
                 if(sensors[i-1]->gettype()==3){
-                    if(LocalReadings[i]==0){
-                        if(i<(size-1)){
-                            if(sensors[i]->gettype()==0){
-                                LocalReadings[i+1]=((float((int)(LocalReadings[i])%1000))/10);
+                    //if(LocalReadings[i]==0){
+                        //if(i<(size-1)){
+                        //}
+                        int buf=LocalReadings[i]
+;                       LocalReadings[i]=(int)(buf/1000);
+                        Serial.println(LocalReadings[i]);
+                        if(sensors[i]->gettype()==0){
+                                LocalReadings[i+1]=((float(buf%1000))/10);
                                 Serial.println(LocalReadings[i+1]);
                                 i++;
-                            }
                         }
-                        LocalReadings[i]=(int)(LocalReadings[i]/1000);
-                        Serial.println(LocalReadings[i]);
-                    }
+                    //}
         
                     
                 }
