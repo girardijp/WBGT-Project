@@ -5,6 +5,8 @@
 #include <stdlib.h>
 using namespace std;
 
+int testcounter =0;
+
 void setup() {
   
 
@@ -32,6 +34,7 @@ void setup() {
 }
 
 void loop() {
+    testcounter+=1;
     Serial.println("");
     Serial.println("");
     for(int i=0;i<4;i++){
@@ -58,7 +61,14 @@ void loop() {
 
     
     }
-    LocalReadings[0]=rand()%10;
+    //LocalReadings[0]=rand()%10;
+    if(testcounter>10){
+      LocalReadings[0]=1;
+      LocalReadings[1]=1;
+      LocalReadings[2]=2;
+      LocalReadings[3]=3;
+
+    }
     Serial.println("Teste");
     esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &LocalReadings, sizeof(LocalReadings));
     Serial.print("Send Status: ");

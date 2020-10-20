@@ -36,7 +36,7 @@ struct Master_send_data{
 };*/
 
 
-float LocalReadings[] = {0,1,2,3,0,0};
+float LocalReadings[] = {0,0,0,0,0,0};
 
 float incomingReadings[] = {0,0,0,0,0,0};
 //Master_send_data LocalReadings;
