@@ -24,6 +24,7 @@ Sensor::Sensor(int pin, float data, int type){
 }
 
 Sensor::~Sensor(){
+    Serial.println("Destructing main");
 
 }
 
@@ -95,6 +96,11 @@ thermalsensor::thermalsensor() : Sensor(){
 }
 
 thermalsensor::~thermalsensor(){
+    Serial.println("Destructing thermal");
+
+    deletewire();
+    deletedalas();
+
 
 }
 
@@ -131,6 +137,13 @@ int thermalsensor::setwire(const int input_pin){
 
 }
 
+void thermalsensor::deletedalas(){
+    delete dalasdata;
+}
+
+void thermalsensor::deletewire(){
+    delete wire;
+}
 
 OneWire thermalsensor::getwire() const{
     return (*wire);
@@ -182,6 +195,7 @@ soilmoisturesensor::soilmoisturesensor(int pin, float data, int type) : Sensor(p
 }
 
 soilmoisturesensor::~soilmoisturesensor(){
+    Serial.println("Destructing soil moisture sensor");
 
 }
 
@@ -210,6 +224,8 @@ dhttemp::dhttemp(int pin, float data, int type) : Sensor(pin,data,type){
 }
 
 dhttemp::~dhttemp(){
+    Serial.println("Destructing dht");
+    deletedhtdata();
 
 }
 
@@ -246,5 +262,9 @@ float dhttemp::getdata(){
     }
     //setdata(h*1000+t*10);
     return(h*1000+t*10);
+}
+
+void dhttemp::deletedhtdata(){
+    delete dhtdata;
 }
 

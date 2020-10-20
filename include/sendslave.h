@@ -4,49 +4,18 @@
 #include <esp_now.h>
 #include <WiFi.h>
 #include <Wire.h>
-//#include <sensor.h>
 
-//IMPLEMENTAR COMO CLASSE
-/*class Message{
-    
-    public:
-
-    private:
-
-};*/
 
 uint8_t broadcastAddress[] = {0x24, 0x62, 0xAB, 0xFF, 0x69, 0xF8};
 
-/*struct Sender_send_data{
-    int change;
-    float data1;
-    float data2;
-    float data3;
-    float data4;
-    float data5;
-};
-
-struct Sender_recive_data{
-    int change=0;
-    int pin1=1;
-    int pin2=2;
-    int pin3=3;
-    int pin4=0;
-    int pin5=0;
-};*/
+float ports[]={0,32,26,12,0,0};
 
 float LocalReadings[] = {0,0,0,0,0,0};
-//Sender_send_data LocalReadings;
-float incomingReadings[] = {0,1,2,3,0,0};
-//Sender_recive_data incomingReadings;
 
-/*void OnDataSent(const uint8_t *, esp_now_send_status_t);
+float incomingReadings[] = {0,0,0,0,0,0};
 
-void OnDataRecv(const uint8_t *, const uint8_t *, int);
+float logsensor[] = {0,0,0,0,0,0};
 
-void addPeer(uint8_t *);
-
-void send(Sender_send_data *, uint8_t *);*/
 
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
   Serial.print("\r\nLast Packet Send Status:\t");
@@ -60,7 +29,15 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
 
 }
 
-/*void addPeer(uint8_t *peerMacAddress){
+/*void OnDataSent(const uint8_t *, esp_now_send_status_t);
+
+void OnDataRecv(const uint8_t *, const uint8_t *, int);
+
+void addPeer(uint8_t *);
+
+void send(Sender_send_data *, uint8_t *);
+
+void addPeer(uint8_t *peerMacAddress){
     esp_now_peer_info_t peerInfo;
     peerInfo.channel = 0;
     peerInfo.encrypt = false;

@@ -14,7 +14,7 @@ class Sensor{
     public:
     Sensor();
     Sensor(int, float, int);
-    ~Sensor();
+    virtual ~Sensor();
     Sensor(const Sensor &s){
         this->pin=s.pin;
         this->data=s.data;
@@ -47,13 +47,15 @@ class thermalsensor : public Sensor{
     int gettempmesh() const;
 
     float getdata();
+    void deletewire();
+    void deletedalas();
 
     private:
 
     int setwire(const int);
     OneWire getwire() const;
     int setdalasdata();
-    DallasTemperature getdalasdata() const; //setar como private
+    DallasTemperature getdalasdata() const; 
     void dalasbegin() const;
     float gettempc();
 
@@ -84,6 +86,7 @@ class dhttemp : public Sensor{
     float getdata();
     void dhtbegin();
     void dhtset(int);
+    void deletedhtdata();
 
     private:
     DHT *dhtdata;
