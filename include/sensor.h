@@ -36,47 +36,6 @@ class Sensor{
 
 };
 
-class thermalsensor : public Sensor{
-    
-    public:
-    thermalsensor();
-    thermalsensor(int, float, int);
-    ~thermalsensor();
-
-    int settempmesh(const int);
-    int gettempmesh() const;
-
-    float getdata();
-    void deletewire();
-    void deletedalas();
-
-    private:
-
-    int setwire(const int);
-    OneWire getwire() const;
-    int setdalasdata();
-    DallasTemperature getdalasdata() const; 
-    void dalasbegin() const;
-    float gettempc();
-
-    OneWire* wire=NULL;
-    DallasTemperature* dalasdata=NULL;
-    int temp_mesh=0;
-    float temperature_C;
-
-};
-
-class soilmoisturesensor : public Sensor{
-    public:
-    soilmoisturesensor();
-    soilmoisturesensor(int,float,int);
-    ~soilmoisturesensor();
-    float getdata();
-
-    private:
-    float moisture;
-
-};
 
 class dhttemp : public Sensor{
     public:
